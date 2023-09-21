@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 
         while(true) {
             std::string words;
-            tenth::print<false>(std::cout, "tenth> ");
+            tenth::print<false>(std::cout, termcolor::blue<char>, "tenth> ");
             std::getline(std::cin, words); // this is not finished
         }
     } else if(argc > 1) {
