@@ -26,12 +26,12 @@ namespace tenth {
             }
             for(auto& elem : stack) {
                 if(std::holds_alternative<long long>(elem)) {
-                    std::cout << std::get<long long>(elem) << " ";
+                    print<false>(std::cout, std::get<long long>(elem), " ");
                 } else if(std::holds_alternative<std::string>(elem)) {
-                    std::cout << std::get<std::string>(elem) << " ";
+                    print<false>(std::cout, std::get<std::string>(elem), " ");
                 }
             }
-            std::cout << "\n";
+            print(std::cout, '\n');
         }
     }
 }
