@@ -1,9 +1,9 @@
 # The Programming Language "Tenth"
 
-I got bored, so i created programming language similiar to forth called tenth.
+I got bored, so I created a programming language similar to Forth called Tenth.
 By the way you should check out <a href="https://www.forth.com/">forth's website!</a>
 
-Tenth is very simple and straightforward programming language, Really!
+Tenth is a very simple and straightforward programming language, really!
 
 I'll show you...
 
@@ -11,11 +11,11 @@ I'll show you...
 
 ## Pushing
 
-To push nubmer onto stack, you need to type:
+To push a number onto the stack, you need to type:
     
     10
 
-that's it, you pushed number 10!
+That's it, you pushed number 10!
 
 ## Adding
 
@@ -23,7 +23,7 @@ If you want to add some numbers, you can do it too! Here's how:
 
     10 15 +
 
-If you want to print result and pop the top of the stack, you can do it too just type:
+If you want to print the result and pop the top of the stack, you can do it too, just type:
 
     10 15 + .
 
