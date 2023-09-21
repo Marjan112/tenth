@@ -51,8 +51,6 @@ namespace tenth {
         } else {
             if(__internal::is_str_int(word)) {
                 return {.opcode = PUSH, .longlong_value = stoll(word), .token_type = INT};
-            } else if(__internal::is_str_str(word)) {
-                return {.opcode = PUSH, .string_value = word.substr(1, word.size() - 2), .token_type = STR};
             } else {
                 print_error("Unable to find a definition for \"", word, "\".");
                 exit(1);

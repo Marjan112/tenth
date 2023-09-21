@@ -8,10 +8,10 @@
 #include "print.hpp"
 
 namespace tenth {
-    void interpret_program(program_t&& program) {
+    void interpret_program(const program_t& program) {
         std::vector<std::variant<long long, std::string>> stack;
 
-        for(auto& op : program) {
+        for(const auto& op : program) {
             switch(op.opcode) {
                 case PUSH: {
                     if(op.token_type == INT) {
