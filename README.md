@@ -87,7 +87,9 @@ To duplicate top value onto stack, you need to have some other value onto stack 
 
     15 dup show
 
-the result will be 15 15
+the result will be 
+    
+    15 15
 
 ## Droping
 
