@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
         while(true) {
             std::string words;
             tenth::print<false>(std::cout, "tenth> ");
-            std::getline(std::cin, words);
+            std::getline(std::cin, words); // this is not finished
         }
     } else if(argc > 1) {
         tenth::measure_time(tenth::interpret_program, tenth::load_program(argv[1]));
