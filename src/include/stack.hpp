@@ -5,6 +5,7 @@
 #include <vector>
 #include <stack>
 #include <variant>
+
 #include "print.hpp"
 
 namespace tenth {
