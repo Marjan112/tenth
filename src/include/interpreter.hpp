@@ -199,7 +199,7 @@ namespace tenth {
                     stack.pop_back();
                     break;
                 }
-                case QUIT: {
+                case EXIT: {
                     __internal::check_stack_size(stack, 1);
                     if(std::holds_alternative<int>(stack.back())) {
                         exit(std::get<int>(stack.back()));
@@ -216,6 +216,30 @@ namespace tenth {
                     } else if(std::holds_alternative<std::string>(stack.back())) {
                         print(std::cout, std::get<std::string>(stack.back()).size());
                     }
+                }
+                case SYSCALL1: {
+                    UNIMPLEMENTED("Syscalls arent implemented yet.");
+                    break;
+                }
+                case SYSCALL2: {
+                    UNIMPLEMENTED("Syscalls arent implemented yet.");
+                    break;
+                }
+                case SYSCALL3: {
+                    UNIMPLEMENTED("Syscalls arent implemented yet.");
+                    break;
+                }
+                case SYSCALL4: {
+                    UNIMPLEMENTED("Syscalls arent implemented yet.");
+                    break;
+                }
+                case SYSCALL5: {
+                    UNIMPLEMENTED("Syscalls arent implemented yet.");
+                    break;
+                }
+                case SYSCALL6: {
+                    UNIMPLEMENTED("Syscalls arent implemented yet.");
+                    break;
                 }
             }
         }

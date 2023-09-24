@@ -147,11 +147,26 @@ Like this:
 
 is going to print 'a' in the console.
 
-## Quit
+## Exit
 
-Quit is opcode that is going to terminate program with exit code.
+Exit is opcode that is going to terminate program with exit code.
 Like this:
 
-    420 quit
+    420 exit
 
-If you want to see more, you can check the source code, sure it's a bit messy, but its not that terrible! :P
+## Sizeof
+
+Sizeof is opcode that is going to tell how many bytes does element have.
+For example:
+
+    10 sizeof
+
+Result is 4
+
+## Output the string
+
+Finally, i added string literals, so now you can push string onto stack. Like this:
+
+    "Hello, World!" .
+
+This is going to print Hello, World! in the console.
