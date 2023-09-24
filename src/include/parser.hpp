@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstring>
 #include <variant>
+#include <regex>
 
 #include "opcodes.hpp"
 #include "print.hpp"
@@ -39,13 +40,17 @@ namespace tenth {
         }
     }
 
-    instruction parse_word_as_opcode(const std::string& word) {
+    instruction parse_word_as_opcode(std::string word) {
         auto it = opcode_map.find(word);
         if(it != opcode_map.end()) {
             return {.opcode = it->second};
         } else {
             if(__internal::is_str_int(word)) {
                 return {.opcode = PUSH, .value = stoi(word)};
+            } else if(__internal::is_str_str(word)) {
+                word.erase(word.begin());
+                word.erase(word.end() - 1);
+                return {.opcode = PUSH, .value = word};
             } else {
                 print_error("Unable to find a definition for \"", word, "\".");
                 exit(1);
@@ -62,14 +67,28 @@ namespace tenth {
 
         program_t program;
 
-        std::string word;
+        std::string words;
+        std::getline(file, words);
 
-        while(file >> word) {
-            if(word.front() == '"') {
-                UNIMPLEMENTED("String literals arent implemented yet.");
-            } else {
-                program.emplace_back(parse_word_as_opcode(word));
-            }
+        if(words.empty()) {
+            exit(0);
+        }
+        
+        std::regex pattern("(\"([^\"]*)\"|'([^']*)'|[^'\" ]+)");
+
+        std::sregex_iterator iter(words.begin(), words.end(), pattern);
+        std::sregex_iterator end;
+
+        std::vector<std::string> split_parts;
+
+        while(iter != end) {
+            std::smatch match = *iter;
+            split_parts.push_back(match.str());
+            ++iter;
+        }
+
+        for(const auto& word : split_parts) {
+            program.emplace_back(parse_word_as_opcode(word));
         }
 
         file.close();
