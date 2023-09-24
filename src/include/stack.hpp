@@ -25,8 +25,8 @@ namespace tenth {
                 return;
             }
             for(const auto& elem : stack) {
-                if(std::holds_alternative<long long>(elem)) {
-                    print<false>(std::cout, std::get<long long>(elem), " ");
+                if(std::holds_alternative<int>(elem)) {
+                    print<false>(std::cout, std::get<int>(elem), " ");
                 } else if(std::holds_alternative<std::string>(elem)) {
                     print<false>(std::cout, std::get<std::string>(elem), " ");
                 }
