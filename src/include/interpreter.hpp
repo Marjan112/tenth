@@ -24,8 +24,6 @@ namespace tenth {
                             auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a + b);
-                        } else if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
-                            
                         }
                     }
                     break;
@@ -39,8 +37,6 @@ namespace tenth {
                             auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(b - a);
-                        } else if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
-                            
                         }
                     }
                     break;

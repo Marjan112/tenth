@@ -153,3 +153,5 @@ Quit is opcode that is going to terminate program with exit code.
 Like this:
 
     420 quit
+
+If you want to see more, you can check the source code, sure it's a bit messy, but its not that terrible! :P
