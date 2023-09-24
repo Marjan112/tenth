@@ -47,7 +47,7 @@ namespace tenth {
         } else {
             if(__internal::is_str_int(word)) {
                 return {.opcode = PUSH, .value = stoi(word)};
-            } else if(__internal::is_str_str(word)) {
+            } else if(__internal::is_str_str(word)) { 
                 word.erase(word.begin());
                 word.erase(word.end() - 1);
                 return {.opcode = PUSH, .value = word};
