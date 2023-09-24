@@ -19,12 +19,12 @@ namespace tenth {
         }
 
         template<typename... ArgsT>
-        void print_stack(std::vector<std::variant<ArgsT...>>&& stack) {
+        void print_stack(const std::vector<std::variant<ArgsT...>>& stack) {
             if(stack.empty()) {
-                std::cout << "(empty)\n";
+                print(std::cout, "(empty)");
                 return;
             }
-            for(auto& elem : stack) {
+            for(const auto& elem : stack) {
                 if(std::holds_alternative<long long>(elem)) {
                     print<false>(std::cout, std::get<long long>(elem), " ");
                 } else if(std::holds_alternative<std::string>(elem)) {

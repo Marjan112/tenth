@@ -29,17 +29,12 @@ namespace tenth {
         }
 
         namespace __test {
-            instruction push(std::variant<long long, std::string> value) {
-                if(std::holds_alternative<long long>(value)) {
-                    return {.opcode = PUSH, .longlong_value = std::get<long long>(value), .token_type = INT};
-                } else if(std::holds_alternative<std::string>(value)) {
-                    return {.opcode = PUSH, .string_value = std::get<std::string>(value), .token_type = STR};
-                }
-                return {};
+            instruction push(const std::variant<int, std::string>& value) {
+                return {.opcode = PUSH, .value = value};
             }
 
             instruction dump() {
-                return {.opcode = DUMP, .token_type = WORD};
+                return {.opcode = DUMP};
             }
         }
     }
@@ -47,10 +42,10 @@ namespace tenth {
     instruction parse_word_as_opcode(const std::string& word) {
         auto it = opcode_map.find(word);
         if(it != opcode_map.end()) {
-            return {.opcode = it->second, .token_type = WORD};
+            return {.opcode = it->second};
         } else {
             if(__internal::is_str_int(word)) {
-                return {.opcode = PUSH, .longlong_value = stoll(word), .token_type = INT};
+                return {.opcode = PUSH, .value = stoi(word)};
             } else {
                 print_error("Unable to find a definition for \"", word, "\".");
                 exit(1);

@@ -146,3 +146,10 @@ Like this:
     65 emit
 
 is going to print 'a' in the console.
+
+## Quit
+
+Quit is opcode that is going to terminate program with exit code.
+Like this:
+
+    420 quit

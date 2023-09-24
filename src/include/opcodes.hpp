@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <variant>
 
 namespace tenth {
     enum opcodes {
@@ -23,20 +24,13 @@ namespace tenth {
         OVER,
         ROT,
         EMIT,
-        QUIT
-    };
-
-    enum token {
-        WORD,
-        INT,
-        STR
+        QUIT,
+        SIZEOF
     };
 
     struct instruction {
         opcodes opcode;
-        long long longlong_value;
-        std::string string_value;
-        token token_type;
+        std::variant<int, std::string> value;
     };
 
     typedef std::vector<instruction> program_t;
@@ -57,7 +51,8 @@ namespace tenth {
         {"over", OVER},
         {"rot", ROT},
         {"emit", EMIT},
-        {"quit", QUIT}
+        {"quit", QUIT},
+        {"sizeof", SIZEOF}
     };
 }
 

@@ -1,33 +1,27 @@
 #ifndef INTERPRETER_HPP
 #define INTERPRETER_HPP
 
-#include <variant>
-
 #include "opcodes.hpp"
 #include "stack.hpp"
 #include "print.hpp"
 
 namespace tenth {
     void interpret_program(const program_t& program) {
-        std::vector<std::variant<long long, std::string>> stack;
+        std::vector<std::variant<int, std::string>> stack;
 
         for(const auto& op : program) {
             switch(op.opcode) {
                 case PUSH: {
-                    if(op.token_type == INT) {
-                        stack.push_back(op.longlong_value);
-                    } else if(op.token_type == STR) {
-                        stack.push_back(op.string_value);
-                    }
+                    stack.push_back(op.value);
                     break;
                 }
                 case PLUS: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<long long>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<long long>(*(stack.end() - 2))) {
-                            auto a = std::get<long long>(stack.back());
+                    if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
                             stack.pop_back();
-                            auto b = std::get<long long>(stack.back());
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a + b);
                         }
@@ -36,11 +30,11 @@ namespace tenth {
                 }
                 case MINUS: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<long long>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<long long>(*(stack.end() - 2))) {
-                            auto a = std::get<long long>(stack.back());
+                    if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
                             stack.pop_back();
-                            auto b = std::get<long long>(stack.back());
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(b - a);
                         }
@@ -49,11 +43,11 @@ namespace tenth {
                 }
                 case MUL: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<long long>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<long long>(*(stack.end() - 2))) {
-                            auto a = std::get<long long>(stack.back());
+                    if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
                             stack.pop_back();
-                            auto b = std::get<long long>(stack.back());
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a * b);
                         }
@@ -62,11 +56,11 @@ namespace tenth {
                 }
                 case DIV: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<long long>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<long long>(*(stack.end() - 2))) {
-                            auto a = std::get<long long>(stack.back());
+                    if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
                             stack.pop_back();
-                            auto b = std::get<long long>(stack.back());
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(b / a);
                         }
@@ -79,7 +73,7 @@ namespace tenth {
                         print_error("Cannot compare strings.");
                         exit(1);
                     }
-                    stack.push_back(std::get<long long>(stack[stack.size() - 2]) < std::get<long long>(stack[stack.size() - 1]) ? -1 : 0);
+                    stack.push_back(std::get<int>(stack[stack.size() - 2]) < std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     break; 
                 }
                 case GT: {
@@ -88,7 +82,7 @@ namespace tenth {
                         print_error("Cannot compare strings.");
                         exit(1);
                     }
-                    stack.push_back(std::get<long long>(stack[stack.size() - 2]) > std::get<long long>(stack[stack.size() - 1]) ? -1 : 0);
+                    stack.push_back(std::get<int>(stack[stack.size() - 2]) > std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     break; 
                 }
                 case EQ: {
@@ -97,29 +91,29 @@ namespace tenth {
                         print_error("Cannot compare strings.");
                         exit(1);
                     }
-                    stack.push_back(std::get<long long>(stack[stack.size() - 2]) == std::get<long long>(stack[stack.size() - 1]) ? -1 : 0);
+                    stack.push_back(std::get<int>(stack[stack.size() - 2]) == std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     break; 
                 }
                 case DUMP: {
                     __internal::check_stack_size(stack, 1);
                     if(std::holds_alternative<std::string>(stack.back())) {
                         print(std::cout, std::get<std::string>(stack.back()));
-                    } else if(std::holds_alternative<long long>(stack.back())) {
-                        print(std::cout, std::get<long long>(stack.back()));
+                    } else if(std::holds_alternative<int>(stack.back())) {
+                        print(std::cout, std::get<int>(stack.back()));
                     }
                     stack.pop_back();
                     break; 
                 }
                 case SHOW: {
-                    __internal::print_stack(std::move(stack));
+                    __internal::print_stack(stack);
                     break;
                 }
                 case DUP: {
                     __internal::check_stack_size(stack, 1);
                     if(std::holds_alternative<std::string>(stack.back())) {
                         stack.push_back(std::get<std::string>(stack.back()));
-                    } else if(std::holds_alternative<long long>(stack.back())) {
-                        stack.push_back(std::get<long long>(stack.back()));
+                    } else if(std::holds_alternative<int>(stack.back())) {
+                        stack.push_back(std::get<int>(stack.back()));
                     }
                     break;
                 }
@@ -139,11 +133,11 @@ namespace tenth {
                             stack.push_back(a);
                             stack.push_back(b);
                         }
-                    } else if(std::holds_alternative<long long>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<long long>(*(stack.end() - 2))) {
-                            auto a = std::get<long long>(stack.back());
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
                             stack.pop_back();
-                            auto b = std::get<long long>(stack.back());
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a);
                             stack.push_back(b);
@@ -156,22 +150,22 @@ namespace tenth {
                     if(std::holds_alternative<std::string>(*(stack.begin() + 1))) {
                         auto a = std::get<std::string>(*(stack.begin() + 1));
                         stack.push_back(a);
-                    } else if(std::holds_alternative<long long>(*(stack.begin() + 1))) {
-                        auto a = std::get<long long>(*(stack.begin() + 1));
+                    } else if(std::holds_alternative<int>(*(stack.begin() + 1))) {
+                        auto a = std::get<int>(*(stack.begin() + 1));
                         stack.push_back(a);
                     }
                     break;
                 }
                 case ROT: {
                     __internal::check_stack_size(stack, 3);
-                    if(std::holds_alternative<long long>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<long long>(*(stack.end() - 2))) {
-                            if(std::holds_alternative<long long>(*(stack.end() - 3))) {
-                                auto a = std::get<long long>(stack.back());
+                    if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
                                 stack.pop_back();
-                                auto b = std::get<long long>(stack.back());
+                                auto b = std::get<int>(stack.back());
                                 stack.pop_back();
-                                auto c = std::get<long long>(stack.back());
+                                auto c = std::get<int>(stack.back());
                                 stack.pop_back();
                                 stack.push_back(b);
                                 stack.push_back(a);
@@ -201,16 +195,27 @@ namespace tenth {
                         print_error("You cannot use emit with strings.");
                         exit(1);
                     }
-                    auto a = std::get<long long>(stack.back());
+                    auto a = std::get<int>(stack.back());
                     stack.pop_back();
                     break;
                 }
                 case QUIT: {
                     __internal::check_stack_size(stack, 1);
-                    if(std::holds_alternative<long long>(stack.back())) {
-                        exit(static_cast<int>(std::get<long long>(stack.back())));
+                    if(std::holds_alternative<int>(stack.back())) {
+                        exit(std::get<int>(stack.back()));
+                    } else {
+                        print_error("Invalid input parameter.");
+                        exit(1);
                     }
                     break;
+                }
+                case SIZEOF: {
+                    __internal::check_stack_size(stack, 1);
+                    if(std::holds_alternative<int>(stack.back())) {
+                        print(std::cout, sizeof(std::get<int>(stack.back())));
+                    } else if(std::holds_alternative<std::string>(stack.back())) {
+                        print(std::cout, sizeof(std::get<std::string>(stack.back())));
+                    }
                 }
             }
         }
