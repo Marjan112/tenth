@@ -3,5 +3,4 @@ build
 temp_thing.txt
 test.10th
 src/main
-fw.c
-fw
+temp.fasm
