@@ -218,26 +218,32 @@ namespace tenth {
                     }
                 }
                 case SYSCALL1: {
+                    __internal::check_stack_size(stack, 2);
                     UNIMPLEMENTED("Syscalls arent implemented yet.");
                     break;
                 }
                 case SYSCALL2: {
+                    __internal::check_stack_size(stack, 3);
                     UNIMPLEMENTED("Syscalls arent implemented yet.");
                     break;
                 }
                 case SYSCALL3: {
+                    __internal::check_stack_size(stack, 4);
                     UNIMPLEMENTED("Syscalls arent implemented yet.");
                     break;
                 }
                 case SYSCALL4: {
+                    __internal::check_stack_size(stack, 5);
                     UNIMPLEMENTED("Syscalls arent implemented yet.");
                     break;
                 }
                 case SYSCALL5: {
+                    __internal::check_stack_size(stack, 6);
                     UNIMPLEMENTED("Syscalls arent implemented yet.");
                     break;
                 }
                 case SYSCALL6: {
+                    __internal::check_stack_size(stack, 7);
                     UNIMPLEMENTED("Syscalls arent implemented yet.");
                     break;
                 }
