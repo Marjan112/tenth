@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     if(!strcmp(argv[1], "--int")) {
         tenth::interpret_program(tenth::load_program(argv[2]));
     } else if(!strcmp(argv[1], "--com")) {
-        tenth::compile_program(tenth::load_program(argv[2]));
+        tenth::compile_program(argv[2], tenth::load_program(argv[2]));
     }
 
     return 0;
