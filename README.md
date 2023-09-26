@@ -163,6 +163,16 @@ For example:
 
 Result is 4
 
+## Increment & Decrement
+
+To increment top of the stack, you need to do this:
+
+    15 inc .
+
+If you want do decrement, you need to do this:
+    
+    15 dec .
+
 ## Output the string
 
 Finally, i added string literals, so now you can push string onto stack. Like this:

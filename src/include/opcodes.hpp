@@ -25,7 +25,9 @@ namespace tenth {
         ROT,
         EMIT,
         EXIT,
-        SIZEOF
+        SIZEOF,
+        INC,
+        DEC
     };
 
     struct instruction {
@@ -36,23 +38,25 @@ namespace tenth {
     typedef std::vector<instruction> program_t;
 
     const std::unordered_map<std::string, opcodes> opcode_map = {
-        {   "+",            PLUS        },
-        {   "-",            MINUS       },
-        {   "*",            MUL         },
-        {   "/",            DIV         },
-        {   "<",            LT          },
-        {   ">",            GT          },
-        {   "=",            EQ          },
-        {   ".",            DUMP        },
-        {   "show",         SHOW        },
-        {   "dup",          DUP         },
-        {   "drop",         DROP        },
-        {   "swap",         SWAP        },
-        {   "over",         OVER        },
-        {   "rot",          ROT         },
-        {   "emit",         EMIT        },
-        {   "exit",         EXIT        },
-        {   "sizeof",       SIZEOF      }
+        {"+", PLUS},
+        {"-", MINUS},
+        {"*", MUL},
+        {"/", DIV},
+        {"<", LT},
+        {">", GT},
+        {"=", EQ},
+        {".", DUMP},
+        {"show", SHOW},
+        {"dup", DUP},
+        {"drop", DROP},
+        {"swap", SWAP},
+        {"over", OVER},
+        {"rot", ROT},
+        {"emit", EMIT},
+        {"exit", EXIT},
+        {"sizeof", SIZEOF},
+        {"inc", INC},
+        {"dec", DEC}
     };
 }
 

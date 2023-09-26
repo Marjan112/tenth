@@ -217,6 +217,29 @@ namespace tenth {
                         print(std::cout, std::get<std::string>(stack.back()).size());
                     }
                 }
+                case INC: {
+                    __internal::check_stack_size(stack, 1);
+                    if(std::holds_alternative<int>(stack.back())) {
+                        auto a = std::get<int>(stack.back());
+                        stack.pop_back();
+                        stack.push_back(a + 1);
+                    } else if(std::holds_alternative<std::string>(stack.back())) {
+                        print_error("Cannot use inc on strings.");
+                        exit(1);
+                    }
+                    break;
+                }
+                case DEC: {
+                    if(std::holds_alternative<int>(stack.back())) {
+                        auto a = std::get<int>(stack.back());
+                        stack.pop_back();
+                        stack.push_back(a - 1);
+                    } else if(std::holds_alternative<std::string>(stack.back())) {
+                        print_error("Cannot use dec on strings.");
+                        exit(1);
+                    }
+                    break;
+                }
             }
         }
     }
