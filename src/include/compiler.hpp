@@ -9,8 +9,9 @@
 namespace tenth {
     void compile_program(std::string filename, const program_t& program) {
         UNIMPLEMENTED("Compiling is not implemented yet.");
-
-        std::ofstream output_file(filename);    
+        #ifdef WIN32
+        print_error("Compiling on windows is not supported yet.");
+        #endif /* WIN32 */
     }
 }
 
