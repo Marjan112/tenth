@@ -28,7 +28,7 @@ namespace tenth {
                 if(std::holds_alternative<int>(elem)) {
                     print<false>(std::cout, std::get<int>(elem), " ");
                 } else if(std::holds_alternative<std::string>(elem)) {
-                    print<false>(std::cout, std::get<std::string>(elem), " ");
+                    print<false>(std::cout, "\"", std::get<std::string>(elem), "\" ");
                 }
             }
             print(std::cout, '\n');
