@@ -94,6 +94,15 @@ namespace tenth {
                     stack.push_back(std::get<int>(stack[stack.size() - 2]) == std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     break; 
                 }
+                case NOT_EQ: {
+                    __internal::check_stack_size(stack);
+                    if(std::holds_alternative<std::string>(stack.back())) {
+                        print_error("Cannot compare strings.");
+                        exit(1);
+                    }
+                    stack.push_back(std::get<int>(stack[stack.size() - 2]) != std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
+                    break;
+                }
                 case DUMP: {
                     __internal::check_stack_size(stack, 1);
                     if(std::holds_alternative<std::string>(stack.back())) {
