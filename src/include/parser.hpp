@@ -11,15 +11,6 @@
 
 namespace tenth {
     namespace __internal {
-        bool is_str_int(const std::string& str) {
-            for(const auto& ch : str) {
-                if(std::isdigit(ch) == 0) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
         bool is_str_str(const std::string& str) {
             if(str.front() == '"') {
                 if(str.back() == '"') {
@@ -45,15 +36,18 @@ namespace tenth {
         if(it != opcode_map.end()) {
             return {.opcode = it->second};
         } else {
-            if(__internal::is_str_int(word)) {
-                return {.opcode = PUSH, .value = stoi(word)};
-            } else if(__internal::is_str_str(word)) { 
-                word.erase(word.begin());
-                word.erase(word.end() - 1);
-                return {.opcode = PUSH, .value = word};
-            } else {
-                print_error("Unable to find a definition for \"", word, "\".");
-                exit(1);
+            try {
+                instruction op = {.opcode = PUSH, .value = stoi(word)};
+                return op;
+            } catch(const std::exception& e) {
+                if(__internal::is_str_str(word)) { 
+                    word.erase(word.begin());
+                    word.erase(word.end() - 1);
+                    return {.opcode = PUSH, .value = word};
+                } else {
+                    print_error("Unable to find a definition for \"", word, "\".");
+                    exit(1);
+                }
             }
         }
     }

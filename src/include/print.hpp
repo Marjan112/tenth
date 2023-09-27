@@ -37,8 +37,8 @@ namespace tenth {
     }
 
     void print_usage(const std::string& program) {
-        print(std::cout, termcolor::grey<char>, "[USAGE]: ", termcolor::reset<char>, program, " <options> [filename]");
-        print(std::cout, "<options>: <--int | --com> (--int for interpret | --com for compile)");
+        print(std::cout, termcolor::grey<char>, "[USAGE]: ", termcolor::reset<char>, program, " [filename]");
+        // print(std::cout, "<options>: <--int | --com> (--int for interpret | --com for compile)");
     }
 }
 

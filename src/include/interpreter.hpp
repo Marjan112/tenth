@@ -25,6 +25,14 @@ namespace tenth {
                             stack.pop_back();
                             stack.push_back(a + b);
                         }
+                    } else if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
+                            auto a = std::get<std::string>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<std::string>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(b + a);
+                        }
                     }
                     break;
                 }
@@ -88,19 +96,19 @@ namespace tenth {
                 case EQ: {
                     __internal::check_stack_size(stack);
                     if(std::holds_alternative<std::string>(stack.back())) {
-                        print_error("Cannot compare strings.");
-                        exit(1);
+                        stack.push_back(std::get<std::string>(stack[stack.size() - 2]) == std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(stack.back())) {
+                        stack.push_back(std::get<int>(stack[stack.size() - 2]) == std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     }
-                    stack.push_back(std::get<int>(stack[stack.size() - 2]) == std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
-                    break; 
+                    break;
                 }
                 case NOT_EQ: {
                     __internal::check_stack_size(stack);
                     if(std::holds_alternative<std::string>(stack.back())) {
-                        print_error("Cannot compare strings.");
-                        exit(1);
+                        stack.push_back(std::get<std::string>(stack[stack.size() - 2]) != std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(stack.back())) {
+                        stack.push_back(std::get<int>(stack[stack.size() - 2]) != std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     }
-                    stack.push_back(std::get<int>(stack[stack.size() - 2]) != std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
                     break;
                 }
                 case DUMP: {
