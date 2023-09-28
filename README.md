@@ -3,6 +3,8 @@
 I got bored, so I created a programming language similar to Forth called Tenth.
 By the way you should check out <a href="https://www.forth.com/">forth's website!</a>
 
+This project is using <a href="https://github.com/ikalnytskyi/termcolor">termcolor</a> library.
+
 Tenth is a very simple and straightforward programming language, really!
 
 I'll show you...
