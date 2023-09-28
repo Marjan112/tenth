@@ -5,11 +5,28 @@ By the way you should check out <a href="https://www.forth.com/">forth's website
 
 This project is using <a href="https://github.com/ikalnytskyi/termcolor">termcolor</a> library.
 
+# Building
+
+To build this thing you need to have <a href="https://cmake.org/">cmake</a> installed. And if you're building this on Windows, then you will need <a href="https://visualstudio.microsoft.com/">Visual Studio</a> also.
+
+After you installed and setup everything, you are going open console and start typing this, hit enter, you know how it goes.
+
+```console
+mkdir build
+cd build
+cmake ../
+```
+
+If you are on linux, you don't have to do anything else anymore. But if you are on Windows, well..
+
+You are going to compile solution in build folder with visual studio by opening 10th.sln,
+now you are going to change from Debug to Release and then press ctrl-shift-b. After that you are going to get Release folder and there is executable.
+
+# Examples:
+
 Tenth is a very simple and straightforward programming language, really!
 
 I'll show you...
-
-# Examples:
 
 ## Pushing
 
