@@ -1,13 +1,13 @@
 # The Programming Language "Tenth"
 
 I got bored, so I created a programming language similar to Forth called Tenth.
-By the way you should check out <a href="https://www.forth.com/">forth's website!</a>
+By the way you should check out <a href="https://www.forth.com/" target="_blank">forth's website!</a>
 
-This project is using <a href="https://github.com/ikalnytskyi/termcolor">termcolor</a> library.
+This project is using <a href="https://github.com/ikalnytskyi/termcolor" target="_blank">termcolor</a> library.
 
 # Building
 
-To build this thing you need to have <a href="https://cmake.org/">cmake</a> installed. And if you're building this on Windows, then you will need <a href="https://visualstudio.microsoft.com/">Visual Studio</a> also.
+To build this thing you need to have <a href="https://cmake.org/" target="_blank">cmake</a> installed. And if you're building this on Windows, then you will need <a href="https://visualstudio.microsoft.com/" target="_blank">Visual Studio</a> also.
 
 After you installed and setup everything, you are going to open console and start typing this, hit enter, you know how it goes.
 
