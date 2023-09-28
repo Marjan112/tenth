@@ -5,7 +5,7 @@
 #include <ostream>
 #include <fstream>
 
-#include "include/termcolor.hpp"
+#include "termcolor.hpp"
 
 #define UNIMPLEMENTED(...)                                                              \
     do {                                                                                \
