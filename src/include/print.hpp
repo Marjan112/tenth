@@ -4,7 +4,8 @@
 #include <iostream>
 #include <ostream>
 #include <fstream>
-#include <termcolor.hpp>
+
+#include "include/termcolor.hpp"
 
 #define UNIMPLEMENTED(...)                                                              \
     do {                                                                                \
