@@ -20,8 +20,26 @@ namespace tenth {
             return false;
         }
 
+        bool is_str_int(const std::string& str) {
+            try {
+                stoi(str);
+            } catch(const std::exception& e) {
+                return false;
+            }
+            return true;
+        }
+
+        bool is_str_float(const std::string& str) {
+            try {
+                stof(str);
+            } catch(const std::exception& e) {
+                return false;
+            }
+            return true;
+        }
+
         namespace __test {
-            instruction push(const std::variant<int, std::string>& value) {
+            instruction push(const std::variant<int, float, std::string>& value) {
                 return {.opcode = PUSH, .value = value};
             }
 
@@ -36,18 +54,17 @@ namespace tenth {
         if(opcode_map.find(word) != opcode_map.end()) {
             return {.opcode = opcode_it->second};
         } else {
-            try {
-                const instruction op = {.opcode = PUSH, .value = stoi(word)};
-                return op;
-            } catch(const std::exception& e) {
-                if(__internal::is_str_str(word)) { 
-                    word.erase(word.begin());
-                    word.erase(word.end() - 1);
-                    return {.opcode = PUSH, .value = word};
-                } else {
-                    print_error("Unable to find a definition for \"", word, "\".");
-                    exit(1);
-                }
+            if(__internal::is_str_int(word)) {
+                return {.opcode = PUSH, .value = stoi(word)};
+            } else if(__internal::is_str_str(word)) {
+                word.erase(word.begin());
+                word.erase(word.end() - 1);
+                return {.opcode = PUSH, .value = word};
+            } else if(__internal::is_str_float(word)) {
+                return {.opcode = PUSH, .value = stof(word)};
+            } else {
+                print_error("Unable to find a definition for \"", word, "\".");
+                exit(1);
             }
         }
     }

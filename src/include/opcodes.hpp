@@ -34,7 +34,7 @@ namespace tenth {
 
     struct instruction {
         opcodes opcode;
-        std::variant<int, std::string> value;
+        std::variant<int, float, std::string> value;
     };
 
     typedef std::vector<instruction> program_t;
