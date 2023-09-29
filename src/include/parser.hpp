@@ -32,12 +32,12 @@ namespace tenth {
     }
 
     instruction parse_word_as_opcode(std::string word) {
-        auto it = opcode_map.find(word);
-        if(it != opcode_map.end()) {
-            return {.opcode = it->second};
+        auto opcode_it = opcode_map.find(word);
+        if(opcode_map.find(word) != opcode_map.end()) {
+            return {.opcode = opcode_it->second};
         } else {
             try {
-                instruction op = {.opcode = PUSH, .value = stoi(word)};
+                const instruction op = {.opcode = PUSH, .value = stoi(word)};
                 return op;
             } catch(const std::exception& e) {
                 if(__internal::is_str_str(word)) { 
@@ -88,6 +88,8 @@ namespace tenth {
         file.close();
         return program;
     }
+
+    
 }
 
 #endif /* PARSER_HPP */

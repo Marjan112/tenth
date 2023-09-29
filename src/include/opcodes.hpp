@@ -28,7 +28,8 @@ namespace tenth {
         EXIT,
         SIZEOF,
         INC,
-        DEC
+        DEC,
+        DEFINE_WORD
     };
 
     struct instruction {
@@ -38,7 +39,7 @@ namespace tenth {
 
     typedef std::vector<instruction> program_t;
 
-    const std::unordered_map<std::string, opcodes> opcode_map = {
+    std::unordered_map<std::string, opcodes> opcode_map = {
         {"+", PLUS},
         {"-", MINUS},
         {"*", MUL},
