@@ -88,8 +88,6 @@ namespace tenth {
         file.close();
         return program;
     }
-
-    
 }
 
 #endif /* PARSER_HPP */

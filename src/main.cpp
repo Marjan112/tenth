@@ -1,6 +1,5 @@
 #include "include/parser.hpp"
 #include "include/interpreter.hpp"
-#include "include/print.hpp"
 
 int main(int argc, char** argv) {
     if(argc < 2) {
