@@ -204,9 +204,9 @@ namespace tenth {
                     if(std::holds_alternative<std::string>(stack.back())) {
                         stack.push_back(std::get<std::string>(stack[stack.size() - 2]) == std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
                     } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"==\" not implemented yet.");
+                        UNIMPLEMENTED("\"=\" not implemented yet.");
                     } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"==\" not implemented yet.");
+                        UNIMPLEMENTED("\"=\" not implemented yet.");
                     }
                     break;
                 }
