@@ -24,6 +24,26 @@ namespace tenth {
                             auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a + b);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a + b);
+                        }
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            auto a = std::get<float>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a + b);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<float>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<int>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a + b);
                         }
                     } else if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
                         if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
@@ -33,15 +53,8 @@ namespace tenth {
                             stack.pop_back();
                             stack.push_back(b + a);
                         }
-                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<float>(*(stack.end() - 2))) {
-                            auto a = std::get<float>(stack.back());
-                            stack.pop_back();
-                            auto b = std::get<float>(stack.back());
-                            stack.pop_back();
-                            stack.push_back(a + b);
-                        }
                     }
+                    break;
                 }
                 case MINUS: {
                     __internal::check_stack_size(stack);
@@ -52,12 +65,24 @@ namespace tenth {
                             auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(b - a);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(b - a);
                         }
                     } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
                         if(std::holds_alternative<float>(*(stack.end() - 2))) {
                             auto a = std::get<float>(stack.back());
                             stack.pop_back();
                             auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(b - a);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<float>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(b - a);
                         }
@@ -73,12 +98,24 @@ namespace tenth {
                             auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a * b);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a * b);
                         }
                     } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
                         if(std::holds_alternative<float>(*(stack.end() - 2))) {
                             auto a = std::get<float>(stack.back());
                             stack.pop_back();
                             auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a * b);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<float>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(a * b);
                         }
@@ -94,22 +131,44 @@ namespace tenth {
                                 print_error("Cannot divide by zero.");
                                 exit(1);
                             }
-                            
+
                             stack.pop_back();
                             auto b = std::get<int>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(b / a);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            auto a = std::get<int>(stack.back());
+                            if(a == 0) {
+                                print_error("Cannot divide by zero.");
+                                exit(1);
+                            }
+
+                            stack.pop_back();
+                            auto b = std::get<float>(stack.back());
                             stack.pop_back();
                             stack.push_back(b / a);
                         }
                     } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
                         if(std::holds_alternative<float>(*(stack.end() - 2))) {
                             auto a = std::get<float>(stack.back());
-                            if(a == 0.0f) {
+                            if(a == 0) {
                                 print_error("Cannot divide by zero.");
                                 exit(1);
                             }
-                            
+
                             stack.pop_back();
                             auto b = std::get<float>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(b / a);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<float>(stack.back());
+                            if(a == 0) {
+                                print_error("Cannot divide by zero.");
+                                exit(1);
+                            }
+
+                            stack.pop_back();
+                            auto b = std::get<int>(stack.back());
                             stack.pop_back();
                             stack.push_back(b / a);
                         }
@@ -121,10 +180,10 @@ namespace tenth {
                     if(std::holds_alternative<std::string>(stack.back())) {
                         print_error("Cannot compare strings.");
                         exit(1);
-                    } else if(std::holds_alternative<int>(stack.back())) {
-                        stack.push_back(std::get<int>(stack[stack.size() - 2]) < std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<float>(stack.back())) {
-                        stack.push_back(std::get<float>(stack[stack.size() - 2]) < std::get<float>(stack[stack.size() - 1]) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\"<\" not implemented yet.");
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\"<\" not implemented yet.");
                     }
                     break; 
                 }
@@ -133,10 +192,10 @@ namespace tenth {
                     if(std::holds_alternative<std::string>(stack.back())) {
                         print_error("Cannot compare strings.");
                         exit(1);
-                    } else if(std::holds_alternative<int>(stack.back())) {
-                        stack.push_back(std::get<int>(stack[stack.size() - 2]) > std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<float>(stack.back())) {
-                        stack.push_back(std::get<float>(stack[stack.size() - 2]) > std::get<float>(stack[stack.size() - 1]) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\">\" not implemented yet.");
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\">\" not implemented yet.");
                     }
                     break; 
                 }
@@ -144,10 +203,10 @@ namespace tenth {
                     __internal::check_stack_size(stack);
                     if(std::holds_alternative<std::string>(stack.back())) {
                         stack.push_back(std::get<std::string>(stack[stack.size() - 2]) == std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<int>(stack.back())) {
-                        stack.push_back(std::get<int>(stack[stack.size() - 2]) == std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<float>(stack.back())) {
-                        stack.push_back(std::get<float>(stack[stack.size() - 2]) == std::get<float>(stack[stack.size() - 1]) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\"==\" not implemented yet.");
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\"==\" not implemented yet.");
                     }
                     break;
                 }
@@ -155,10 +214,10 @@ namespace tenth {
                     __internal::check_stack_size(stack);
                     if(std::holds_alternative<std::string>(stack.back())) {
                         stack.push_back(std::get<std::string>(stack[stack.size() - 2]) != std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<int>(stack.back())) {
-                        stack.push_back(std::get<int>(stack[stack.size() - 2]) != std::get<int>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<float>(stack.back())) {
-                        stack.push_back(std::get<float>(stack[stack.size() - 2]) != std::get<float>(stack[stack.size() - 1]) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\"!=\" not implemented yet.");
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        UNIMPLEMENTED("\"!=\" not implemented yet.");
                     }
                     break;
                 }
@@ -184,7 +243,7 @@ namespace tenth {
                         stack.push_back(std::get<std::string>(stack.back()));
                     } else if(std::holds_alternative<int>(stack.back())) {
                         stack.push_back(std::get<int>(stack.back()));
-                    } else if(std::holds_alternative<int>(stack.back())) {
+                    } else if(std::holds_alternative<float>(stack.back())) {
                         stack.push_back(std::get<float>(stack.back()));
                     }
                     break;

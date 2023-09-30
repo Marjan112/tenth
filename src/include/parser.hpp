@@ -12,6 +12,10 @@
 namespace tenth {
     namespace __internal {
         bool is_str_str(const std::string& str) {
+            if(str.empty()) {
+                return false;
+            }
+
             if(str.front() == '"') {
                 if(str.back() == '"') {
                     return true;
@@ -21,26 +25,65 @@ namespace tenth {
         }
 
         bool is_str_int(const std::string& str) {
-            try {
-                stoi(str);
-            } catch(const std::exception& e) {
+            if(str.empty()) {
                 return false;
             }
+
+            int start_index = 0;
+
+            if(str.front() == '-') {
+                if(str.length() == 1) {
+                    return false;
+                }
+                start_index = 1;
+            }
+
+            for(int i = start_index; i < str.length(); i++) {
+                if(!isdigit(str[i])) {
+                    return false;
+                }
+            }
+
             return true;
         }
 
         bool is_str_float(const std::string& str) {
-            try {
-                stof(str);
-            } catch(const std::exception& e) {
+            if(str.empty()) {
                 return false;
             }
+
+            int start_index = 0;
+
+            if(str.front() == '-') {
+                if(str.length() == 1) {
+                    return false;
+                }
+                start_index = 1;
+            }
+
+            bool decimal_point = false;
+
+            for(int i = start_index; i < str.length(); i++) {
+                if(str[i] == '.') {
+                    if(decimal_point == true) {
+                        return false;
+                    }
+                    decimal_point = true;
+                } else if(!isdigit(str[i])) {
+                    return false;
+                }
+            }
+            
             return true;
         }
 
         namespace __test {
             instruction push(const std::variant<int, float, std::string>& value) {
                 return {.opcode = PUSH, .value = value};
+            }
+
+            instruction plus() {
+                return {.opcode = PLUS};
             }
 
             instruction dump() {
@@ -51,7 +94,7 @@ namespace tenth {
 
     instruction parse_word_as_opcode(std::string word) {
         auto opcode_it = opcode_map.find(word);
-        if(opcode_map.find(word) != opcode_map.end()) {
+        if(opcode_it != opcode_map.end()) {
             return {.opcode = opcode_it->second};
         } else {
             if(__internal::is_str_int(word)) {
