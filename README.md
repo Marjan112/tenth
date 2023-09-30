@@ -1,26 +1,31 @@
 # The Programming Language "Tenth"
 
 I got bored, so I created a programming language similar to Forth called Tenth.
-By the way you should check out <a href="https://www.forth.com/" target="_blank">forth's website!</a>
+By the way you should check out [forth's website!](https://www.forth.com/)</a>
 
-This project is using <a href="https://github.com/ikalnytskyi/termcolor" target="_blank">termcolor</a> library.
+This project is using [termcolor](https://github.com/ikalnytskyi/termcolor) library.
 
 # Building
 
-To build this thing you need to have <a href="https://cmake.org/" target="_blank">cmake</a> installed. And if you're building this on Windows, then you will need <a href="https://visualstudio.microsoft.com/" target="_blank">Visual Studio</a> also.
+* To build this thing you need to have [cmake](https://cmake.org/) installed. And if you're building this on Windows, then you will need [Visual Studio](https://visualstudio.microsoft.com/) also.
+* After you installed and setup everything, you are going to open console and start typing this, hit enter, you know how it goes.
 
-After you installed and setup everything, you are going to open console and start typing this, hit enter, you know how it goes.
-
+``` console
+$ mkdir build
+```
 ```console
-mkdir build
-cd build
-cmake ../
+$ cd build
+```
+```console
+$ cmake ../
 ```
 
 If you are on linux, you don't have to do anything else anymore. But if you are on Windows, well..
 
-You are going to compile solution in build folder with visual studio by opening 10th.sln,
+* You are going to compile solution in build folder with visual studio by opening 10th.sln,
 now you are going to change from Debug to Release and then press ctrl-shift-b. After that you are going to get Release folder and there is executable.
+
+***This project is unfinished, so anything can change anytime, be aware of that!***
 
 # Examples:
 
