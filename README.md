@@ -35,7 +35,7 @@ I'll show you...
 
 ## Pushing
 
-To push a number onto the stack, you need to type:
+* To push a number onto the stack, you need to type:
     
     10
 
@@ -53,7 +53,10 @@ If you want to print the result and pop the top of the stack, you can do it too,
 
 ## Dump
 
-What is "."? It's a opcode that pops the top of the stack and prints it on the screen. Dump.
+To dump value from the stack, you are going to put "." at the end.
+
+    420 .
+    420 69 . (69 gets dumped)
 
 ## Show
 
