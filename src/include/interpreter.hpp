@@ -177,48 +177,22 @@ namespace tenth {
                 }
                 case LT: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<std::string>(stack.back())) {
-                        print_error("Cannot compare strings.");
-                        exit(1);
-                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"<\" not implemented yet.");
-                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"<\" not implemented yet.");
-                    }
+                    UNIMPLEMENTED("\"<\" is not implemented yet.");
                     break; 
                 }
                 case GT: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<std::string>(stack.back())) {
-                        print_error("Cannot compare strings.");
-                        exit(1);
-                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\">\" not implemented yet.");
-                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\">\" not implemented yet.");
-                    }
+                    UNIMPLEMENTED("\">\" is not implemented yet.");
                     break; 
                 }
                 case EQ: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<std::string>(stack.back())) {
-                        stack.push_back(std::get<std::string>(stack[stack.size() - 2]) == std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"=\" not implemented yet.");
-                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"=\" not implemented yet.");
-                    }
+                    UNIMPLEMENTED("\"=\" not implemented yet.");
                     break;
                 }
                 case NOT_EQ: {
                     __internal::check_stack_size(stack);
-                    if(std::holds_alternative<std::string>(stack.back())) {
-                        stack.push_back(std::get<std::string>(stack[stack.size() - 2]) != std::get<std::string>(stack[stack.size() - 1]) ? -1 : 0);
-                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"!=\" not implemented yet.");
-                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
-                        UNIMPLEMENTED("\"!=\" not implemented yet.");
-                    }
+                    UNIMPLEMENTED("\"!=\" not implemented yet.");
                     break;
                 }
                 case DUMP: {
