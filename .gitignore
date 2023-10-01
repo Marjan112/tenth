@@ -1,6 +1,5 @@
 .vscode
 build
-temp_thing.txt
-test.10th
-src/include/compiler.hpp
+abc.txt
+def.10th
 rembr.txt
