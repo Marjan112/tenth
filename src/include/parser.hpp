@@ -5,6 +5,7 @@
 #include <cstring>
 #include <variant>
 #include <regex>
+#include <sstream>
 
 #include "opcodes.hpp"
 #include "print.hpp"
@@ -119,18 +120,26 @@ namespace tenth {
             exit(1);
         }
 
-        program_t program;
+        program_t program = {};
 
-        std::string words;
-        std::getline(file, words);
+        std::string whole_file;
+        std::string source;
+        std::string word;
 
-        if(words.empty()) {
-            exit(0);
+        std::stringstream ss;
+        ss << file.rdbuf();
+        whole_file = ss.str();
+        for(const auto& ch : whole_file) {
+            if(ch == '\n') {
+                source += ' ';
+            } else {
+                source += ch;
+            }
         }
         
         std::regex pattern("(\"([^\"]*)\"|'([^']*)'|[^'\" ]+)");
 
-        std::sregex_iterator iter(words.begin(), words.end(), pattern);
+        std::sregex_iterator iter(source.begin(), source.end(), pattern);
         std::sregex_iterator end;
 
         std::vector<std::string> split_parts;

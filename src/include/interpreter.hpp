@@ -177,22 +177,79 @@ namespace tenth {
                 }
                 case LT: {
                     __internal::check_stack_size(stack);
-                    UNIMPLEMENTED("\"<\" is not implemented yet.");
-                    break; 
+                    if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
+                        stack.push_back(std::get<std::string>(*(stack.end() - 1)) < std::get<std::string>(*(stack.end() - 2)) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) < std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) < std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) < std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) < std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    }
+                    break;
                 }
                 case GT: {
                     __internal::check_stack_size(stack);
-                    UNIMPLEMENTED("\">\" is not implemented yet.");
+                    if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
+                        stack.push_back(std::get<std::string>(*(stack.end() - 1)) > std::get<std::string>(*(stack.end() - 2)) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) > std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) > std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) > std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) > std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    }
                     break; 
                 }
+                
                 case EQ: {
                     __internal::check_stack_size(stack);
-                    UNIMPLEMENTED("\"=\" not implemented yet.");
+                    if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
+                        stack.push_back(std::get<std::string>(*(stack.end() - 1)) == std::get<std::string>(*(stack.end() - 2)) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) == std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) == std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) == std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) == std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    }
                     break;
                 }
                 case NOT_EQ: {
                     __internal::check_stack_size(stack);
-                    UNIMPLEMENTED("\"!=\" not implemented yet.");
+                    if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
+                        stack.push_back(std::get<std::string>(*(stack.end() - 1)) != std::get<std::string>(*(stack.end() - 2)) ? -1 : 0);
+                    } else if(std::holds_alternative<int>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) != std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) != std::get<int>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    } else if(std::holds_alternative<float>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<float>(*(stack.end() - 2)) != std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            stack.push_back(std::get<int>(*(stack.end() - 2)) == std::get<float>(*(stack.end() - 1)) ? -1 : 0);
+                        }
+                    }
                     break;
                 }
                 case DUMP: {
@@ -234,6 +291,20 @@ namespace tenth {
                             auto a = std::get<std::string>(stack.back());
                             stack.pop_back();
                             auto b = std::get<std::string>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a);
+                            stack.push_back(b);
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            auto a = std::get<std::string>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<int>(stack.back());
+                            stack.pop_back();
+                            stack.push_back(a);
+                            stack.push_back(b);
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            auto a = std::get<std::string>(stack.back());
+                            stack.pop_back();
+                            auto b = std::get<float>(stack.back());
                             stack.pop_back();
                             stack.push_back(a);
                             stack.push_back(b);
