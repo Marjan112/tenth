@@ -386,16 +386,86 @@ namespace tenth {
                                 stack.push_back(b);
                                 stack.push_back(a);
                                 stack.push_back(c);
+                            } else if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }  else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
                             }
-                        }
-                    } else if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
-                        if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }
+                        } else if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
                             if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
-                                auto a = std::get<std::string>(stack.back());
+                                auto a = std::get<int>(stack.back());
                                 stack.pop_back();
                                 auto b = std::get<std::string>(stack.back());
                                 stack.pop_back();
                                 auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
                                 stack.pop_back();
                                 stack.push_back(b);
                                 stack.push_back(a);
@@ -410,6 +480,188 @@ namespace tenth {
                                 auto b = std::get<float>(stack.back());
                                 stack.pop_back();
                                 auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }
+                        } else if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }
+                        }
+                    } else if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
+                        if(std::holds_alternative<std::string>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }
+                        } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<int>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            }
+                        } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
+                            if(std::holds_alternative<float>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<float>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<int>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<int>(stack.back());
+                                stack.pop_back();
+                                stack.push_back(b);
+                                stack.push_back(a);
+                                stack.push_back(c);
+                            } else if(std::holds_alternative<std::string>(*(stack.end() - 3))) {
+                                auto a = std::get<std::string>(stack.back());
+                                stack.pop_back();
+                                auto b = std::get<float>(stack.back());
+                                stack.pop_back();
+                                auto c = std::get<std::string>(stack.back());
                                 stack.pop_back();
                                 stack.push_back(b);
                                 stack.push_back(a);
