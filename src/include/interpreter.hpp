@@ -687,7 +687,7 @@ namespace tenth {
                     if(std::holds_alternative<int>(stack.back())) {
                         exit(std::get<int>(stack.back()));
                     } else {
-                        print_error("Invalid input parameter.");
+                        print_error("Invalid exit parameter.");
                         exit(1);
                     }
                     break;
