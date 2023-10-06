@@ -677,7 +677,7 @@ namespace tenth {
                         print(std::cout, static_cast<char>(std::get<int>(stack.back())));
                         stack.pop_back();
                     } else {
-                        print_error("Invalid input parameter.");
+                        print_error("Invalid emit parameter.");
                         exit(1);
                     }
                     break;
