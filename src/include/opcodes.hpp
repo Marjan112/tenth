@@ -28,8 +28,7 @@ namespace tenth {
         EXIT,
         SIZEOF,
         INC,
-        DEC,
-        DEFINE_WORD
+        DEC
     };
 
     struct instruction {
