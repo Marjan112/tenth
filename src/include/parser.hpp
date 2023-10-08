@@ -94,9 +94,9 @@ namespace tenth {
     }
 
     instruction parse_word_as_opcode(std::string word) {
-        auto opcode_it = opcode_map.find(word);
-        if(opcode_it != opcode_map.end()) {
-            return {.opcode = opcode_it->second};
+        auto word_it = BUILTIN_WORDS.find(word);
+        if(word_it != BUILTIN_WORDS.end()) {
+            return {.opcode = word_it->second};
         } else {
             if(__internal::is_str_int(word)) {
                 return {.opcode = PUSH, .value = stoi(word)};
@@ -120,7 +120,7 @@ namespace tenth {
             exit(1);
         }
 
-        program_t program = {};
+        program_t program;
 
         std::string whole_file;
         std::string source;
@@ -129,6 +129,11 @@ namespace tenth {
         std::stringstream ss;
         ss << file.rdbuf();
         whole_file = ss.str();
+
+        if(whole_file.empty()) {
+            return {};
+        }
+
         for(const auto& ch : whole_file) {
             if(ch == '\n') {
                 source += ' ';
