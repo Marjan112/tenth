@@ -13,7 +13,7 @@ namespace tenth {
             PLUS,
             MINUS,
             MUL,
-            DIV,
+            DIV, 
         // TODO: Move these into separate enum for comparison operators
             LT,
             GT,
