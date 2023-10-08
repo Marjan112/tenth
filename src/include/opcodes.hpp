@@ -9,14 +9,16 @@
 namespace tenth {
     enum opcodes {
         PUSH,
-        PLUS,
-        MINUS,
-        MUL,
-        DIV,
-        LT,
-        GT,
-        EQ,
-        NOT_EQ,
+        // TODO: Move these into separate enum for arithmetic operators
+            PLUS,
+            MINUS,
+            MUL,
+            DIV,
+        // TODO: Move these into separate enum for comparison operators
+            LT,
+            GT,
+            EQ,
+            NOT_EQ,
         DUMP,
         SHOW,
         DUP,
@@ -38,15 +40,17 @@ namespace tenth {
 
     typedef std::vector<instruction> program_t;
 
-    std::unordered_map<std::string, opcodes> opcode_map = {
-        {"+", PLUS},
-        {"-", MINUS},
-        {"*", MUL},
-        {"/", DIV},
-        {"<", LT},
-        {">", GT},
-        {"=", EQ},
-        {"!=", NOT_EQ},
+    const std::unordered_map<std::string, opcodes> BUILTIN_WORDS = {
+        // TODO: Move these into separate map for arithmetic operators
+            {"+", PLUS},
+            {"-", MINUS},
+            {"*", MUL},
+            {"/", DIV},
+        // TODO: Move these into separate map for comparison operators
+            {"<", LT},
+            {">", GT},
+            {"=", EQ},
+            {"!=", NOT_EQ},
         {".", DUMP},
         {"show", SHOW},
         {"dup", DUP},
