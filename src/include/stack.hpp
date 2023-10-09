@@ -1,9 +1,7 @@
 #ifndef STACK_UTILS
 #define STACK_UTILS
 
-#include <iostream>
 #include <vector>
-#include <stack>
 #include <variant>
 
 #include "print.hpp"

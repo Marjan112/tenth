@@ -2,7 +2,6 @@
 #define PARSER_HPP
 
 #include <fstream>
-#include <cstring>
 #include <variant>
 #include <regex>
 #include <sstream>
