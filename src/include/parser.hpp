@@ -11,35 +11,22 @@
 
 namespace tenth {
     namespace __internal {
-        bool is_str_str(const std::string& str) {
-            if(str.empty()) {
-                return false;
-            }
-
-            if(str.front() == '"') {
-                if(str.back() == '"') {
-                    return true;
-                }
-            }
-            return false;
+        bool is_word_str(const std::string& word) {
+            return word.front() == '"' && word.back() == '"';
         }
 
-        bool is_str_int(const std::string& str) {
-            if(str.empty()) {
-                return false;
-            }
-
+        bool is_word_int(const std::string& word) {
             int start_index = 0;
 
-            if(str.front() == '-') {
-                if(str.length() == 1) {
+            if(word.front() == '-') {
+                if(word.length() == 1) {
                     return false;
                 }
                 start_index = 1;
             }
 
-            for(int i = start_index; i < str.length(); i++) {
-                if(!isdigit(str[i])) {
+            for(int i = start_index; i < word.length(); i++) {
+                if(!isdigit(word[i])) {
                     return false;
                 }
             }
@@ -47,15 +34,15 @@ namespace tenth {
             return true;
         }
 
-        bool is_str_float(const std::string& str) {
-            if(str.empty()) {
+        bool is_word_float(const std::string& word) {
+            if(word.empty()) {
                 return false;
             }
 
             int start_index = 0;
 
-            if(str.front() == '-') {
-                if(str.length() == 1) {
+            if(word.front() == '-') {
+                if(word.length() == 1) {
                     return false;
                 }
                 start_index = 1;
@@ -63,13 +50,13 @@ namespace tenth {
 
             bool decimal_point = false;
 
-            for(int i = start_index; i < str.length(); i++) {
-                if(str[i] == '.') {
+            for(int i = start_index; i < word.length(); i++) {
+                if(word[i] == '.') {
                     if(decimal_point == true) {
                         return false;
                     }
                     decimal_point = true;
-                } else if(!isdigit(str[i])) {
+                } else if(!isdigit(word[i])) {
                     return false;
                 }
             }
@@ -97,13 +84,13 @@ namespace tenth {
         if(word_it != BUILTIN_WORDS.end()) {
             return {.opcode = word_it->second};
         } else {
-            if(__internal::is_str_int(word)) {
+            if(__internal::is_word_int(word)) {
                 return {.opcode = PUSH, .value = stoi(word)};
-            } else if(__internal::is_str_str(word)) {
+            } else if(__internal::is_word_str(word)) {
                 word.erase(word.begin());
                 word.erase(word.end() - 1);
                 return {.opcode = PUSH, .value = word};
-            } else if(__internal::is_str_float(word)) {
+            } else if(__internal::is_word_float(word)) {
                 return {.opcode = PUSH, .value = stof(word)};
             } else {
                 print_error("Unable to find a definition for \"", word, "\".");

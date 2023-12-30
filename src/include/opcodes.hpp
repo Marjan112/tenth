@@ -37,7 +37,7 @@ namespace tenth {
         opcodes opcode;
         std::variant<int, float, std::string> value;
     };
-
+    
     typedef std::vector<instruction> program_t;
 
     const std::unordered_map<std::string, opcodes> BUILTIN_WORDS = {
