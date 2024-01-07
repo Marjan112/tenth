@@ -7,7 +7,7 @@
 
 namespace tenth {
     void interpret_program(const program_t& program) {
-        std::vector<std::variant<int, float, std::string>> stack;
+        std::vector<stack_value_t> stack;
 
         for(const auto& op : program) {
             switch(op.opcode) {
@@ -260,6 +260,8 @@ namespace tenth {
                         print(std::cout, std::get<int>(stack.back()));
                     } else if(std::holds_alternative<float>(stack.back())) {
                         print(std::cout, std::get<float>(stack.back()));
+                    } else if(std::holds_alternative<size_t>(stack.back())) {
+                        print(std::cout, std::get<size_t>(stack.back()));
                     }
                     stack.pop_back();
                     break; 
@@ -694,13 +696,15 @@ namespace tenth {
                 }
                 case SIZEOF: {
                     __internal::check_stack_size(stack, 1);
+                    size_t size = 0;
                     if(std::holds_alternative<int>(stack.back())) {
-                        print(std::cout, sizeof(std::get<int>(stack.back())));
+                        size = sizeof(int);
                     } else if(std::holds_alternative<std::string>(stack.back())) {
-                        print(std::cout, std::get<std::string>(stack.back()).size());
+                        size = std::get<std::string>(stack.back()).size();
                     } else if(std::holds_alternative<float>(stack.back())) {
-                        print(std::cout, sizeof(std::get<float>(stack.back())));
+                        size = sizeof(float);
                     }
+                    stack.push_back(size); 
                 }
                 case INC: {
                     __internal::check_stack_size(stack, 1);
