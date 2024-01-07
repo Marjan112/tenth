@@ -65,7 +65,7 @@ namespace tenth {
         }
 
         namespace __test {
-            instruction push(const std::variant<int, float, std::string>& value) {
+            instruction push(const stack_value_t& value) {
                 return {.opcode = PUSH, .value = value};
             }
 
