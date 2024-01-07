@@ -33,9 +33,11 @@ namespace tenth {
         DEC
     };
 
+    typedef std::variant<int, float, std::string, size_t> stack_value_t;
+
     struct instruction {
         opcodes opcode;
-        std::variant<int, float, std::string> value;
+        stack_value_t value;
     };
     
     typedef std::vector<instruction> program_t;
