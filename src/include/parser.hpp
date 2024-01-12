@@ -110,10 +110,11 @@ namespace tenth {
 
         std::string whole_file;
         std::string source;
-        std::string word;
 
         std::stringstream ss;
         ss << file.rdbuf();
+        file.close();
+
         whole_file = ss.str();
 
         if(whole_file.empty()) {
@@ -144,8 +145,6 @@ namespace tenth {
         for(const auto& word : split_parts) {
             program.emplace_back(parse_word_as_opcode(word));
         }
-
-        file.close();
         return program;
     }
 }
