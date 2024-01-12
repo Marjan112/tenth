@@ -82,7 +82,7 @@ or some other expression like 2 - 2 * 2  - 2 can be written like this:
 
 To divide an number in tenth, you need to type this:
 
-    1 2 / .
+    1.0 2.0 / .
 
 ## Comparing
 
@@ -186,7 +186,7 @@ Like this:
 Sizeof is opcode that is going to tell how many bytes does element have.
 For example:
 
-    10 sizeof
+    10 sizeof .
 
 Result is 4
 
@@ -207,3 +207,6 @@ Finally, i added string literals, so now you can push string onto stack. Like th
     "Hello, World!" .
 
 This is going to print Hello, World! in the console.
+
+# License
+Licensed under the MIT License, see the [LICENSE](./LICENSE) file.
