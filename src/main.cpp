@@ -8,6 +8,7 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    tenth::interpret_program(tenth::load_program(argv[1]));
+    tenth::Parser file_parser(argv[1]);
+    tenth::interpret_program(file_parser.parse());
     return 0;
 }
