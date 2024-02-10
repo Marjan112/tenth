@@ -1,11 +1,10 @@
-#ifndef LEXER_HPP
-#define LEXER_HPP
+#pragma once
 
 #include <string>
 
 class Lexer {
 public:
-    Lexer(const std::string& source) : source(source), position(0), line_count(1) {}
+    Lexer(const std::string& source) : source(source), position(0) {}
 
     std::string get_next_token() {
         skip_whitespace();
@@ -58,7 +57,4 @@ private:
 
     std::string source;
     size_t position;
-    size_t line_count;
 };
-
-#endif /* LEXER_HPP */

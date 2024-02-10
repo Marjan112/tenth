@@ -1,5 +1,4 @@
-#ifndef PARSER_HPP
-#define PARSER_HPP
+#pragma once
 
 #include <fstream>
 #include <sstream>
@@ -92,5 +91,3 @@ private:
 
     std::string filename;
 };
-
-#endif /* PARSER_HPP */

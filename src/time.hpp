@@ -1,5 +1,4 @@
-#ifndef TIME_HPP
-#define TIME_HPP
+#pragma once
 
 #include <chrono>
 #include <utility>
@@ -13,5 +12,3 @@ void measure_time(FunctionT function, ArgsT&&... args) {
     std::chrono::duration<double, std::milli> duration(end - start);
     print_info("Execution Time: ", termcolor::white<char>, duration.count(), termcolor::reset<char>, "ms.");
 }
-
-#endif /* TIME_HPP */

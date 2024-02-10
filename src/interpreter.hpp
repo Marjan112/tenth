@@ -1,5 +1,4 @@
-#ifndef INTERPRETER_HPP
-#define INTERPRETER_HPP
+#pragma once
 
 #include "opcodes.hpp"
 #include "stack.hpp"
@@ -735,4 +734,3 @@ void interpret_program(const program_t& program) {
         }
     }
 }
-#endif /* INTERPRETER_HPP */

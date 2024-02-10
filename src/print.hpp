@@ -1,15 +1,10 @@
-#ifndef PRINT_HPP
-#define PRINT_HPP
-
-#include <iostream>
-#include <ostream>
-#include <fstream>
+#pragma once
 
 #include "termcolor.hpp"
 
 #define UNIMPLEMENTED(...)                                                              \
     do {                                                                                \
-        tenth::print_info(__VA_ARGS__, " File: ", __FILE__, ". Line: ", __LINE__, "."); \
+        print_info(__VA_ARGS__, " File: ", __FILE__, ". Line: ", __LINE__, "."); \
         exit(1);                                                                        \
     } while(false)
 
@@ -39,5 +34,3 @@ void print_info(ArgsT&&... args) {
 void print_usage(const std::string& program) {
     print(std::cout, termcolor::white<char>, "[USAGE]: ", termcolor::reset<char>, program, " [filename]");
 }
-
-#endif /* PRINT_HPP */

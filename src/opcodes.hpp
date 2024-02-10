@@ -1,5 +1,4 @@
-#ifndef OPCODES_HPP
-#define OPCODES_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -65,5 +64,3 @@ const std::unordered_map<std::string, opcodes> BUILTIN_WORDS = {
     {"inc", INC},
     {"dec", DEC}
 };
-
-#endif /* OPCODES_HPP */

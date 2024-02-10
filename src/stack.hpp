@@ -1,5 +1,4 @@
-#ifndef STACK_UTILS
-#define STACK_UTILS
+#pragma once
 
 #include <vector>
 #include <variant>
@@ -31,5 +30,3 @@ void print_stack(const std::vector<std::variant<ArgsT...>>& stack) {
     }
     print(std::cout, '\n');
 }
-
-#endif /* STACK_UTILS */
