@@ -731,6 +731,20 @@ void interpret_program(const program_t& program) {
                 }
                 break;
             }
+            case PRINT: {
+                check_stack_size(stack, 1);
+                if(std::holds_alternative<std::string>(stack.back())) {
+                    print<false>(std::cout, std::get<std::string>(stack.back()));
+                } else if(std::holds_alternative<int>(stack.back())) {
+                    print<false>(std::cout, std::get<int>(stack.back()));
+                } else if(std::holds_alternative<float>(stack.back())) {
+                    print<false>(std::cout, std::get<float>(stack.back()));
+                } else if(std::holds_alternative<size_t>(stack.back())) {
+                    print<false>(std::cout, std::get<size_t>(stack.back()));
+                }
+                stack.pop_back();
+                break;
+            }
         }
     }
 }

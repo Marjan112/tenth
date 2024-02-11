@@ -28,7 +28,8 @@ enum opcodes {
     EXIT,
     SIZEOF,
     INC,
-    DEC
+    DEC,
+    PRINT
 };
 
 typedef std::variant<int, float, std::string, size_t> stack_value_t;
@@ -62,5 +63,6 @@ const std::unordered_map<std::string, opcodes> BUILTIN_WORDS = {
     {"exit", EXIT},
     {"sizeof", SIZEOF},
     {"inc", INC},
-    {"dec", DEC}
+    {"dec", DEC},
+    {"print", PRINT}
 };
