@@ -33,6 +33,60 @@ private:
     std::string read_string() {
         size_t start = position++;
         while(position < source.length() && source[position] != '"') {
+            if(source[position] == '\\') {
+                switch(source[position + 1]) {
+                    case 'e': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\e');
+                        break;
+                    }
+                    case 'r': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\r');
+                        break;
+                    }
+                    case 't': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\t');
+                        break;
+                    }
+                    case 'a': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\a');
+                        break;
+                    }
+                    case 'f': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\f');
+                        break;
+                    }
+                    case 'v': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\v');
+                        break;
+                    }
+                    case 'b': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\b');
+                        break;
+                    }
+                    case 'n': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\n');
+                        break;
+                    }
+                    case '\\': {
+                        source.erase(source.begin() + position, source.begin() + position + 2);
+                        source.insert(source.begin() + position, '\\');
+                        break;
+                    };
+                    default: {
+                        print_error("Unknown escape sequence.");
+                        exit(1);
+                        break;
+                    }
+                }
+            }
             position++;
         }
         position++;
