@@ -732,17 +732,26 @@ void interpret_program(const program_t& program) {
                 break;
             }
             case PRINT: {
-                check_stack_size(stack, 1);
-                if(std::holds_alternative<std::string>(stack.back())) {
-                    print<false>(std::cout, std::get<std::string>(stack.back()));
-                } else if(std::holds_alternative<int>(stack.back())) {
-                    print<false>(std::cout, std::get<int>(stack.back()));
-                } else if(std::holds_alternative<float>(stack.back())) {
-                    print<false>(std::cout, std::get<float>(stack.back()));
-                } else if(std::holds_alternative<size_t>(stack.back())) {
-                    print<false>(std::cout, std::get<size_t>(stack.back()));
+                if(stack.size() < 1) {
+                    print_error("Missing argument.");
+                    exit(1);
                 }
-                stack.pop_back();
+
+                std::stringstream output;
+
+                for(const auto& elem : stack) {
+                    if(std::holds_alternative<int>(elem)) {
+                        output << std::get<int>(elem);
+                    } else if(std::holds_alternative<float>(elem)) {
+                        output << std::get<float>(elem);
+                    } else if(std::holds_alternative<std::string>(elem)) {
+                        output << std::get<std::string>(elem);
+                    } else if(std::holds_alternative<size_t>(elem)) {
+                        output << std::get<size_t>(elem);
+                    }
+                }
+
+                print<false>(std::cout, output.str());
                 break;
             }
         }
