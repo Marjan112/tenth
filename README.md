@@ -208,5 +208,13 @@ Finally, i added string literals, so now you can push string onto stack. Like th
 
 This is going to print Hello, World! in the console.
 
+## Print
+
+To print something that is on the stack, you need to do this:
+
+    "Hello, " 123 " " 123.5 " World\n" print
+
+This is going to print "Hello, 123 123.5 World".
+
 # License
 Licensed under the MIT License, see the [LICENSE](./LICENSE) file.
