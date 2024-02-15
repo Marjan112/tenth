@@ -82,10 +82,6 @@ private:
     }
 
     bool is_str(const std::string& token) {
-        if(token.empty()) {
-            return false;
-        }
-
         return !token.empty() && token.front() == '"' && token.back() == '"';
     }
 

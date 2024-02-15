@@ -126,7 +126,7 @@ void interpret_program(const program_t& program) {
                     if(std::holds_alternative<int>(*(stack.end() - 2))) {
                         auto a = std::get<int>(stack.back());
                         if(a == 0) {
-                            print_error("Cannot divide by zero.");
+                            print_error("div: cannot divide by zero");
                             exit(1);
                         }
                         stack.pop_back();
@@ -136,7 +136,7 @@ void interpret_program(const program_t& program) {
                     } else if(std::holds_alternative<float>(*(stack.end() - 2))) {
                         auto a = std::get<int>(stack.back());
                         if(a == 0) {
-                            print_error("Cannot divide by zero.");
+                            print_error("div: cannot divide by zero");
                             exit(1);
                         }
                         stack.pop_back();
@@ -148,7 +148,7 @@ void interpret_program(const program_t& program) {
                     if(std::holds_alternative<float>(*(stack.end() - 2))) {
                         auto a = std::get<float>(stack.back());
                         if(a == 0) {
-                            print_error("Cannot divide by zero.");
+                            print_error("div: cannot divide by zero");
                             exit(1);
                         }
                         stack.pop_back();
@@ -158,7 +158,7 @@ void interpret_program(const program_t& program) {
                     } else if(std::holds_alternative<int>(*(stack.end() - 2))) {
                         auto a = std::get<float>(stack.back());
                         if(a == 0) {
-                            print_error("Cannot divide by zero.");
+                            print_error("div: cannot divide by zero");
                             exit(1);
                         }
                         stack.pop_back();
@@ -166,7 +166,7 @@ void interpret_program(const program_t& program) {
                         stack.pop_back();
                         stack.push_back(b / a);
                     }
-                } 
+                }
                 break;
             }
             case LT: {
@@ -207,7 +207,6 @@ void interpret_program(const program_t& program) {
                 }
                 break; 
             }
-            
             case EQ: {
                 check_stack_size(stack);
                 if(std::holds_alternative<std::string>(*(stack.end() - 1))) {
@@ -673,7 +672,7 @@ void interpret_program(const program_t& program) {
                     print(std::cout, static_cast<char>(std::get<int>(stack.back())));
                     stack.pop_back();
                 } else {
-                    print_error("Invalid emit parameter.");
+                    print_error("emit: invalid parameter, must be an interger");
                     exit(1);
                 }
                 break;
@@ -683,7 +682,7 @@ void interpret_program(const program_t& program) {
                 if(std::holds_alternative<int>(stack.back())) {
                     exit(std::get<int>(stack.back()));
                 } else {
-                    print_error("Invalid exit parameter.");
+                    print_error("exit: invalid parameter, must be an integer");
                     exit(1);
                 }
                 break;
@@ -698,7 +697,8 @@ void interpret_program(const program_t& program) {
                 } else if(std::holds_alternative<float>(stack.back())) {
                     size = sizeof(float);
                 }
-                stack.push_back(size); 
+                stack.push_back(size);
+                break;
             }
             case INC: {
                 check_stack_size(stack, 1);
@@ -711,12 +711,13 @@ void interpret_program(const program_t& program) {
                     stack.pop_back();
                     stack.push_back(a + 1.0f);
                 } else if(std::holds_alternative<std::string>(stack.back())) {
-                    print_error("Cannot use inc on strings.");
+                    print_error("dec: cannot use strings");
                     exit(1);
                 }
                 break;
             }
             case DEC: {
+                check_stack_size(stack, 1);
                 if(std::holds_alternative<int>(stack.back())) {
                     auto a = std::get<int>(stack.back());
                     stack.pop_back();
@@ -726,16 +727,13 @@ void interpret_program(const program_t& program) {
                     stack.pop_back();
                     stack.push_back(a - 1.0f);
                 } else if(std::holds_alternative<std::string>(stack.back())) {
-                    print_error("Cannot use dec on strings.");
+                    print_error("dec: cannot use strings");
                     exit(1);
                 }
                 break;
             }
             case PRINT: {
-                if(stack.size() < 1) {
-                    print_error("Missing argument.");
-                    exit(1);
-                }
+                check_stack_size(stack, 1);
 
                 std::stringstream output;
 
@@ -749,6 +747,7 @@ void interpret_program(const program_t& program) {
                     } else if(std::holds_alternative<size_t>(elem)) {
                         output << std::get<size_t>(elem);
                     }
+                    stack.pop_back();
                 }
 
                 print<false>(std::cout, output.str());
