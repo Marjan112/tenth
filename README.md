@@ -12,11 +12,7 @@ This project is using [termcolor](https://github.com/ikalnytskyi/termcolor) libr
 
 ``` console
 $ mkdir build
-```
-```console
 $ cd build
-```
-```console
 $ cmake ../
 ```
 
@@ -179,7 +175,7 @@ is going to print 'a' in the console.
 Exit is opcode that is going to terminate program with exit code.
 Like this:
 
-    420 exit
+    0 exit
 
 ## Sizeof
 
