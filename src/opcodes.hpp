@@ -26,10 +26,11 @@ enum opcodes {
     ROT,
     EMIT,
     EXIT,
-    SIZEOF,
     INC,
     DEC,
-    PRINT
+    PRINT,
+    JUMP,
+    DEBUG_PRINT
 };
 
 typedef std::variant<int, float, std::string, size_t> stack_value_t;
@@ -61,8 +62,9 @@ const std::unordered_map<std::string, opcodes> BUILTIN_WORDS = {
     {"rot", ROT},
     {"emit", EMIT},
     {"exit", EXIT},
-    {"sizeof", SIZEOF},
     {"inc", INC},
     {"dec", DEC},
-    {"print", PRINT}
+    {"print", PRINT},
+    {"jump", JUMP},
+    {"debug_print", DEBUG_PRINT}
 };
