@@ -7,10 +7,11 @@
 void interpret_program(const program_t& program) {
     std::vector<stack_value_t> stack;
 
-    for(const auto& op : program) {
-        switch(op.opcode) {
+    for(int i = 0; i < program.size();) {
+        switch(program[i].opcode) {
             case PUSH: {
-                stack.push_back(op.value);
+                stack.push_back(program[i].value);
+                i++;
                 break;
             }
             case PLUS: {
@@ -52,6 +53,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(b + a);
                     }
                 }
+                i++;
                 break;
             }
             case MINUS: {
@@ -85,6 +87,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(b - a);
                     }
                 }
+                i++;
                 break;
             }
             case MUL: {
@@ -118,6 +121,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(a * b);
                     }
                 }
+                i++;
                 break;
             }
             case DIV: {
@@ -167,6 +171,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(b / a);
                     }
                 }
+                i++;
                 break;
             }
             case LT: {
@@ -186,6 +191,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(std::get<int>(*(stack.end() - 2)) < std::get<float>(*(stack.end() - 1)) ? -1 : 0);
                     }
                 }
+                i++;
                 break;
             }
             case GT: {
@@ -205,6 +211,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(std::get<int>(*(stack.end() - 2)) > std::get<float>(*(stack.end() - 1)) ? -1 : 0);
                     }
                 }
+                i++;
                 break; 
             }
             case EQ: {
@@ -224,6 +231,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(std::get<int>(*(stack.end() - 2)) == std::get<float>(*(stack.end() - 1)) ? -1 : 0);
                     }
                 }
+                i++;
                 break;
             }
             case NOT_EQ: {
@@ -243,6 +251,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(std::get<int>(*(stack.end() - 2)) == std::get<float>(*(stack.end() - 1)) ? -1 : 0);
                     }
                 }
+                i++;
                 break;
             }
             case DUMP: {
@@ -257,10 +266,12 @@ void interpret_program(const program_t& program) {
                     print(std::cout, std::get<size_t>(stack.back()));
                 }
                 stack.pop_back();
+                i++;
                 break; 
             }
             case SHOW: {
                 print_stack(stack);
+                i++;
                 break;
             }
             case DUP: {
@@ -272,11 +283,13 @@ void interpret_program(const program_t& program) {
                 } else if(std::holds_alternative<float>(stack.back())) {
                     stack.push_back(std::get<float>(stack.back()));
                 }
+                i++;
                 break;
             }
             case DROP: {
                 check_stack_size(stack, 1);
                 stack.pop_back();
+                i++;
                 break;
             }
             case SWAP: {
@@ -351,6 +364,7 @@ void interpret_program(const program_t& program) {
                         stack.push_back(b);
                     }
                 }
+                i++;
                 break;
             }
             case OVER: {
@@ -365,6 +379,7 @@ void interpret_program(const program_t& program) {
                     auto a = std::get<float>(*(stack.begin() + 1));
                     stack.push_back(a);
                 }
+                i++;
                 break;
             }
             case ROT: {
@@ -664,6 +679,7 @@ void interpret_program(const program_t& program) {
                         }
                     }
                 }
+                i++;
                 break;
             }
             case EMIT: {
@@ -675,6 +691,7 @@ void interpret_program(const program_t& program) {
                     print_error("emit: invalid parameter, must be an interger");
                     exit(1);
                 }
+                i++;
                 break;
             }
             case EXIT: {
@@ -685,51 +702,33 @@ void interpret_program(const program_t& program) {
                     print_error("exit: invalid parameter, must be an integer");
                     exit(1);
                 }
-                break;
-            }
-            case SIZEOF: {
-                check_stack_size(stack, 1);
-                size_t size = 0;
-                if(std::holds_alternative<int>(stack.back())) {
-                    size = sizeof(int);
-                } else if(std::holds_alternative<std::string>(stack.back())) {
-                    size = std::get<std::string>(stack.back()).size();
-                } else if(std::holds_alternative<float>(stack.back())) {
-                    size = sizeof(float);
-                }
-                stack.push_back(size);
+                i++;
                 break;
             }
             case INC: {
                 check_stack_size(stack, 1);
                 if(std::holds_alternative<int>(stack.back())) {
-                    auto a = std::get<int>(stack.back());
-                    stack.pop_back();
-                    stack.push_back(a + 1);
+                    std::get<int>(*(stack.end() - 1))++;
                 } else if(std::holds_alternative<float>(stack.back())) {
-                    auto a = std::get<float>(stack.back());
-                    stack.pop_back();
-                    stack.push_back(a + 1.0f);
+                    std::get<float>(*(stack.end() - 1))++;
                 } else if(std::holds_alternative<std::string>(stack.back())) {
-                    print_error("dec: cannot use strings");
+                    print_error("inc: cannot use strings");
                     exit(1);
                 }
+                i++;
                 break;
             }
             case DEC: {
                 check_stack_size(stack, 1);
                 if(std::holds_alternative<int>(stack.back())) {
-                    auto a = std::get<int>(stack.back());
-                    stack.pop_back();
-                    stack.push_back(a - 1);
+                    std::get<int>(*(stack.end() - 1))--;
                 } else if(std::holds_alternative<float>(stack.back())) {
-                    auto a = std::get<float>(stack.back());
-                    stack.pop_back();
-                    stack.push_back(a - 1.0f);
+                    std::get<float>(*(stack.end() - 1))--;
                 } else if(std::holds_alternative<std::string>(stack.back())) {
                     print_error("dec: cannot use strings");
                     exit(1);
                 }
+                i++;
                 break;
             }
             case PRINT: {
@@ -751,6 +750,42 @@ void interpret_program(const program_t& program) {
                 }
 
                 print<false>(std::cout, output.str());
+                i++;
+                break;
+            }
+            case JUMP: {
+                check_stack_size(stack, 1);
+
+                if(std::holds_alternative<int>(stack.back())) {
+                    i = std::get<int>(stack.back());
+                    stack.pop_back();
+                } else {
+                    print_error("jump: invalid parameter, must be an integer");
+                    exit(1);
+                }
+                break;
+            }
+            case DEBUG_PRINT: {
+                check_stack_size(stack, 1);
+
+                std::stringstream output;
+
+                for(const auto& elem : stack) {
+                    if(std::holds_alternative<int>(elem)) {
+                        output << std::get<int>(elem);
+                    } else if(std::holds_alternative<float>(elem)) {
+                        output << std::get<float>(elem);
+                    } else if(std::holds_alternative<std::string>(elem)) {
+                        output << std::get<std::string>(elem);
+                    } else if(std::holds_alternative<size_t>(elem)) {
+                        output << std::get<size_t>(elem);
+                    }
+                }
+
+                output << "\n";
+
+                print<false>(std::cout, output.str());
+                i++;
                 break;
             }
         }
