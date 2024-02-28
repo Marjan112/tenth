@@ -214,3 +214,5 @@ This is going to print "Hello, 123 123.5 World".
 
 # License
 Licensed under the MIT License, see the [LICENSE](./LICENSE) file.
+
+See the [termcolor license](./src/termcolor/LICENSE).
