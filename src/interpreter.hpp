@@ -5,6 +5,7 @@
 #include "print.hpp"
 
 void interpret_program(const program_t& program) {
+    // TODO: Opcodes should be executed the moment they are parsed...
     std::vector<stack_value_t> stack;
 
     for(int i = 0; i < program.size();) {
@@ -262,8 +263,6 @@ void interpret_program(const program_t& program) {
                     print(std::cout, std::get<int>(stack.back()));
                 } else if(std::holds_alternative<float>(stack.back())) {
                     print(std::cout, std::get<float>(stack.back()));
-                } else if(std::holds_alternative<size_t>(stack.back())) {
-                    print(std::cout, std::get<size_t>(stack.back()));
                 }
                 stack.pop_back();
                 i++;
@@ -743,8 +742,6 @@ void interpret_program(const program_t& program) {
                         output << std::get<float>(elem);
                     } else if(std::holds_alternative<std::string>(elem)) {
                         output << std::get<std::string>(elem);
-                    } else if(std::holds_alternative<size_t>(elem)) {
-                        output << std::get<size_t>(elem);
                     }
                     stack.pop_back();
                 }
@@ -777,8 +774,6 @@ void interpret_program(const program_t& program) {
                         output << std::get<float>(elem);
                     } else if(std::holds_alternative<std::string>(elem)) {
                         output << std::get<std::string>(elem);
-                    } else if(std::holds_alternative<size_t>(elem)) {
-                        output << std::get<size_t>(elem);
                     }
                 }
 
