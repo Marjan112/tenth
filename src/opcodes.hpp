@@ -33,7 +33,7 @@ enum opcodes {
     DEBUG_PRINT
 };
 
-typedef std::variant<int, float, std::string, size_t> stack_value_t;
+typedef std::variant<int, float, std::string> stack_value_t;
 
 struct instruction {
     opcodes opcode;
