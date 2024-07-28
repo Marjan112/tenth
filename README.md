@@ -177,13 +177,6 @@ Like this:
 
     0 exit
 
-## Sizeof
-
-Sizeof is opcode that is going to tell how many bytes does element have.
-For example:
-
-    10 sizeof .
-
 Result is 4
 
 ## Increment & Decrement
