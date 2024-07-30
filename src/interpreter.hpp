@@ -5,7 +5,6 @@
 #include "print.hpp"
 
 void interpret_program(const program_t& program) {
-    // TODO: Opcodes should be executed the moment they are parsed...
     std::vector<stack_value_t> stack;
 
     for(int i = 0; i < program.size();) {
