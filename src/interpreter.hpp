@@ -1,6 +1,6 @@
 #pragma once
 
-#include "opcodes.hpp"
+#include "program.hpp"
 #include "stack.hpp"
 #include "print.hpp"
 
@@ -8,7 +8,7 @@ void interpret_program(const program_t& program) {
     std::vector<stack_value_t> stack;
 
     for(int i = 0; i < program.size();) {
-        switch(program[i].opcode) {
+        switch(program[i].type) {
             case PUSH: {
                 stack.push_back(program[i].value);
                 i++;
@@ -749,14 +749,14 @@ void interpret_program(const program_t& program) {
                 i++;
                 break;
             }
-            case JUMP: {
+            case JMP: {
                 check_stack_size(stack, 1);
 
                 if(std::holds_alternative<int>(stack.back())) {
                     i = std::get<int>(stack.back());
                     stack.pop_back();
                 } else {
-                    print_error("jump: invalid parameter, must be an integer");
+                    print_error("jmp: invalid parameter, must be an integer");
                     exit(1);
                 }
                 break;

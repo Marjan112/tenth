@@ -4,7 +4,7 @@
 #include <sstream>
 #include <cstring>
 
-#include "opcodes.hpp"
+#include "program.hpp"
 #include "print.hpp"
 #include "Lexer.hpp"
 
@@ -34,23 +34,25 @@ public:
         return program;
     }
 private:
-    instruction parse_token(std::string token) {
-        auto word_it = BUILTIN_WORDS.find(token);
-        if(word_it != BUILTIN_WORDS.end()) {
-            return {.opcode = word_it->second};
+    inst parse_token(std::string token) {
+        auto word_it = OPCODES.find(token);
+        if(word_it != OPCODES.end()) {
+            return {.type = word_it->second};
         }
         if(is_int(token)) {
-            return {.opcode = PUSH, .value = stoi(token)};
-        } else if(is_str(token)) {
+            return {.type = PUSH, .value = stoi(token)};
+        }
+        if(is_str(token)) {
             token.erase(token.begin());
             token.erase(token.end() - 1);
-            return {.opcode = PUSH, .value = token};
-        } else if(is_float(token)) {
-            return {.opcode = PUSH, .value = stof(token)};
-        } else {
-            print_error("Unable to find a definition for \"", token, "\".");
-            exit(1);
+            return {.type = PUSH, .value = token};
         }
+        if(is_float(token)) {
+            return {.type = PUSH, .value = stof(token)};
+        }
+
+        print_error("Unable to find a definition for \"", token, "\".");
+        exit(1);
     }
 
     bool is_int(const std::string& token) {
