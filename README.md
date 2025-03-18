@@ -1,70 +1,60 @@
-# The Programming Language "Tenth"
-
-I got bored, so I created a programming language similar to Forth called Tenth.
-By the way you should check out [forth's website!](https://www.forth.com/)</a>
+# Tenth
 
 This project is using [termcolor](https://github.com/ikalnytskyi/termcolor) library.
 
 # Building
 
-* To build this thing you need to have [cmake](https://cmake.org/) installed. And if you're building this on Windows, then you will need [Visual Studio](https://visualstudio.microsoft.com/) also.
-* After you installed and setup everything, you are going to open console and start typing this, hit enter, you know how it goes.
-
+Install:
+* [cmake](https://cmake.org/)
+* GCC *if you are on Linux*
+* [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) *if you are on Windows*
+  
 ``` console
 $ mkdir build
 $ cd build
 $ cmake ../
 ```
 
-If you are on linux, you don't have to do anything else anymore. But if you are on Windows, well..
-
-* You are going to compile solution in build folder with visual studio by opening 10th.sln,
-now you are going to change from Debug to Release and then press ctrl-shift-b. After that you are going to get Release folder and there is executable.
-
-***This project is unfinished, so anything can change anytime, be aware of that!***
+On Linux:
+``` console
+$ make
+```
+On Windows:
+``` console
+$ msbuild 10th.sln
+```
 
 # Examples:
 
-Tenth is a very simple and straightforward programming language, really!
+## Push
 
-I'll show you...
+To push a number onto the stack, you need to type:
 
-## Pushing
-
-* To push a number onto the stack, you need to type:
-    
     10
+## Addition
 
-That's it, you pushed number 10!
-
-## Adding
-
-If you want to add some numbers, you can do it too! Here's how:
+If you want to add some numbers:
 
     10 15 +
 
-If you want to print the result and pop the top of the stack, you can do it too, just type:
+If you want to print the result and pop the top of the stack:
 
     10 15 + .
 
 ## Dump
 
-To dump value from the stack, you are going to put "." at the end.
+To dump value from the stack
 
-    420 .
+    420 . (420 gets dumped)
     420 69 . (69 gets dumped)
 
 ## Show
 
-There's more things in this language, for example, if you want to print the whole stack, you need to type this:
+To show stack:
 
     10 25 42 88 90 show
 
-What is "show". It's a opcode that prints the elements of the stack.
-
-If want to do more math you can! Let me show you!
-
-## Multiplying
+## Multiplication
 
 For example, this expression: 2 + 2 * 2 can be written like this:
 
@@ -74,15 +64,15 @@ or some other expression like 2 - 2 * 2  - 2 can be written like this:
 
     -2 2 * 2 -2 - .
 
-## Dividing
+## Division
 
-To divide an number in tenth, you need to type this:
+To divide a number:
 
     1.0 2.0 / .
 
-## Comparing
+## Comparison
 
-To compare two numbers in tenth, you can!
+To compare two numbers:
 
 5 is less than 10
 
@@ -96,17 +86,13 @@ This is going to be true, so the value thats going to be pushed onto stack is -1
 
 This is going to be false, so the value that's going to be pushed onto stack is 0 representing false.
 
-And finally
-
 50 is equal to 50
 
     50 50 = .
 
-This is going to be true, and you already know what value is going to be onto the stack...
+## Duplication
 
-## Duplicating
-
-To duplicate top value onto stack, you need to have some other value onto stack to be able to duplicate it, so let's get to work:
+To duplicate top value onto stack, you need to have some other value onto stack to be able to duplicate it:
 
     15 dup show
 
@@ -114,7 +100,7 @@ the result will be
     
     15 15
 
-## Droping
+## Drop
 
 Droping is almost same as dumping, but you are not printing the value that you've poped from the top of the stack. To drop a value you need to have one already:
 
@@ -127,7 +113,7 @@ Result is going to be:
     10
     (empty)
 
-## Swapping
+## Swap
 
 In order to swap two values, we need to push them to stack.
 
@@ -150,7 +136,7 @@ Result is:
     420 69 56
     420 69 56 69
 
-## Rotate
+## Rot
 
 Rot opcode is going to rotate first three elements onto stack. The third element from the top of the stack gets moved to the top of the stack, pushing the other two elements down.
 
@@ -168,7 +154,7 @@ Like this:
 
     65 emit
 
-is going to print 'a' in the console.
+is going to print 'a'.
 
 ## Exit
 
@@ -181,21 +167,19 @@ Result is 4
 
 ## Increment & Decrement
 
-To increment top of the stack, you need to do this:
+To increment top of the stack:
 
     15 inc .
 
-If you want do decrement, you need to do this:
+If you want do decrement:
     
     15 dec .
 
-## Output the string
-
-Finally, i added string literals, so now you can push string onto stack. Like this:
+## String literals
 
     "Hello, World!" .
 
-This is going to print Hello, World! in the console.
+This is going to dump Hello, World! in the console.
 
 ## Print
 
@@ -203,7 +187,7 @@ To print something that is on the stack, you need to do this:
 
     "Hello, " 123 " " 123.5 " World\n" print
 
-This is going to print "Hello, 123 123.5 World".
+This is going to print Hello, 123 123.5 World.
 
 # License
 Licensed under the MIT License, see the [LICENSE](./LICENSE) file.
