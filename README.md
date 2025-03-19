@@ -19,9 +19,9 @@ On Linux:
 ``` console
 $ make
 ```
-On Windows:
+On Windows (Developer Command Prompt):
 ``` console
-$ msbuild 10th.sln
+$ msbuild tenth.sln
 ```
 
 # Examples:
