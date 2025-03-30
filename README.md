@@ -1,5 +1,8 @@
 # Tenth
 
+> [!WARNING]
+> This project has been archived because i just dont know what to do with it anymore. The way i made the whole thing is wrong and i just cant add any new features to it. Also i included `tenth_vm` folder that contains tenth implementation in C. Maybe in the future i'll change my mind and start working on `tenth_vm` again but idk about that.
+
 This project is using [termcolor](https://github.com/ikalnytskyi/termcolor) library.
 
 # Building
